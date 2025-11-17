@@ -50,3 +50,413 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Grandangolo · Edicola Digitale & Notizie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Codice AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1970039367444329"
+          crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg: #050509;
+      --accent: #00a651;
+      --accent-soft: rgba(0,166,81,0.15);
+      --text: #f5f5f5;
+      --muted: #b0b0b0;
+      --card: #11111d;
+      --border-soft: rgba(255,255,255,0.08);
+    
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #191933 0, #050509 60%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5,5,9,0.98), rgba(5,5,9,0.9));
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand img {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+    .brand-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    nav {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+    }
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--border-soft);
+      color: var(--text);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 26px 18px 40px;
+    }
+
+    /* HERO */
+    #hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .hero-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .hero-title {
+      font-size: clamp(26px, 4vw, 34px);
+      margin: 0 0 10px;
+    }
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      color: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(0,166,81,0.5);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      border-color: var(--border-soft);
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    /* NOTIZIE CON IMMAGINI */
+    #news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    #news-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    #news-header p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    #rss-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .rss-card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .rss-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.55);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .rss-image-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      overflow: hidden;
+      background: #000;
+    }
+    .rss-image-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+    .rss-card:hover .rss-image-wrap img {
+      transform: scale(1.03);
+    }
+
+    .rss-content {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .rss-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .rss-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .rss-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .rss-read {
+      font-weight: 500;
+      color: #d4fbe5;
+    }
+
+    #rss-empty {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px dashed var(--border-soft);
+      background: rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 12px 18px 18px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      background: radial-gradient(circle at bottom, #151525 0, #050509 55%);
+      margin-top: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .brand img {
+        height: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-inner">
+      <a href="https://jgnewland.github.io/" class="brand">
+        <img src="https://raw.githubusercontent.com/jgnewland/grandangolo/main/logo-grandangolo.png.png"
+             alt="Grandangolo Settimanale">
+        <div class="brand-title">Grandangolo · Edicola Digitale</div>
+      </a>
+      <nav>
+        <a href="#news"></a>
+        <a href="https://jgnewland.github.io/grandangolo/">Edicola digitale</a>
+        <a href="https://www.grandangoloagrigento.it/" target="_blank" rel="noopener">Sito principale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-kicker">Grandangolo settimanale</div>
+      <h1 class="hero-title">Accedi all’edicola digitale e resta aggiornato sulle ultime notizie.</h1>
+      <p class="hero-subtitle">
+        Da qui entri nell’edicola digitale del settimanale Grandangolo e puoi leggere
+        le notizie più recenti pubblicate sul sito.
+      </p>
+
+      <div class="hero-cta">
+        <a href="https://jgnewland.github.io/grandangolo/" class="btn-primary">
+          Vai all'Edicola Digitale
+        </a>
+        <a href="https://www.grandangoloagrigento.it/" target="_blank" rel="noopener" class="btn-ghost">
+          Visita il sito principale
+        </a>
+      </div>
+    </section>
+
+    <!-- NOTIZIE SOLO CON IMMAGINI -->
+    <section id="news">
+      <div id="news-header">
+        <h2>Ultime notizie</h2>
+        <p>Articoli con immagine da grandangoloagrigento.it</p>
+      </div>
+
+      <div id="rss-empty">Carico le ultime notizie…</div>
+      <div id="rss-container" style="display:none;"></div>
+    </section>
+  </main>
+
+  <footer>
+    Grandangolo · jgnewland.github.io – Edicola digitale e notizie. Tutti i diritti riservati.
+  </footer>
+
+  <!-- SCRIPT: LETTURA RSS (solo articoli con immagine) -->
+  <script>
+    (function() {
+      const container = document.getElementById('rss-container');
+      const empty = document.getElementById('rss-empty');
+
+      const rssUrl = 'https://www.grandangoloagrigento.it/feed/';
+      const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.items || !data.items.length) {
+            empty.textContent = 'Nessuna notizia disponibile in questo momento.';
+            return;
+          }
+
+          // Filtra solo gli articoli che hanno un'immagine
+          const withImage = data.items.filter(item =>
+            (item.enclosure && item.enclosure.link) || item.thumbnail
+          );
+
+          if (!withImage.length) {
+            empty.textContent = '';
+            return;
+          }
+
+          empty.style.display = 'none';
+          container.style.display = 'grid';
+
+          // Mostra le prime 6 notizie con immagine
+          withImage.slice(0, 6).forEach(item => {
+            const card = document.createElement('article');
+            card.className = 'rss-card';
+
+            const imgUrl =
+              (item.enclosure && item.enclosure.link) ||
+              item.thumbnail ||
+              'https://www.grandangoloagrigento.it/wp-content/uploads/sites/3/2020/01/cropped-logo-grandangolo-512x512.png';
+
+            const pubDate = new Date(item.pubDate);
+            const dateStr = pubDate.toLocaleDateString('it-IT', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric'
+            });
+
+            card.innerHTML = `
+              <a href="${item.link}" target="_blank" rel="noopener">
+                <div class="rss-image-wrap">
+                  <img src="${imgUrl}" alt="${item.title}">
+                </div>
+              </a>
+              <div class="rss-content">
+                <a href="${item.link}" target="_blank" rel="noopener" class="rss-title">
+                  ${item.title}
+                </a>
+                <div class="rss-meta">${dateStr}</div>
+                <div class="rss-footer">
+                  <span>${item.author || 'Redazione Grandangolo'}</span>
+                  <a class="rss-read" href="${item.link}" target="_blank" rel="noopener">
+                    Leggi &raquo;
+                  </a>
+                </div>
+              </div>
+            `;
+
+            container.appendChild(card);
+          });
+        })
+        .catch(err => {
+          console.error('Errore nel caricamento RSS', err);
+          empty.textContent =
+            'Non riesco a caricare le ultime notizie. Puoi comunque visitare il sito principale su grandangoloagrigento.it.';
+        });
+    })();
+  </script>
+</body>
+</html>
